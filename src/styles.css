@@ -792,3 +792,56 @@ body.pixel .panel h2 {
 body.pixel .btn.small {
   font-size: 13px;
 }
+
+/* ---------- Cooked bowl card ---------- */
+#cooked {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: min(460px, calc(100vw - 32px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 14px 14px 20px;
+  border-radius: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(12px);
+  z-index: 6;
+}
+
+#cooked h2 {
+  margin: 0 0 2px;
+  font-size: 18px;
+}
+
+#cooked p {
+  margin: 0;
+  font-size: 13px;
+}
+
+#cooked .row {
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  #cooked {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  #cooked .row {
+    justify-content: center;
+  }
+}
+
+body.pixel #cooked {
+  border-radius: 0;
+  backdrop-filter: none;
+  background: #fbe9d2;
+  color: #2d2440;
+  border: 3px solid #2d2440;
+  box-shadow: 4px 4px 0 #2d2440;
+}

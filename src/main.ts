@@ -3,11 +3,12 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { loadAssets } from './assets';
 import { sfx } from './audio';
 import { Bowl, type Piece } from './bowl';
+import { CookedPot } from './cooked';
 import { ALL, PRICE_PER_100G, SOUPS, TAX_LABEL, TAX_RATE, priceFor, thumbUrl } from './ingredients';
 import { PixelPass } from './pixel';
 import { BOWL_POS, SCALE_POS, buildWorld, pixelSwatches, type Tray } from './world';
 
-type Mode = 'loading' | 'pick' | 'inspect' | 'guess' | 'weighing' | 'receipt';
+type Mode = 'loading' | 'pick' | 'inspect' | 'guess' | 'weighing' | 'receipt' | 'cooked';
 
 /* Model orientation tuning (set after looking at the generated meshes). */
 const TONGS_TIP_SIGN = -1; // which end of the tongs' long axis holds the tips
@@ -118,6 +119,14 @@ const scaleView = () => {
   };
 };
 
+const cookedView = () => {
+  const narrow = camera.aspect < 1;
+  return {
+    pos: BOWL_POS.clone().add(new THREE.Vector3(0, narrow ? 0.9 : 0.56, narrow ? 0.5 : 0.44)),
+    look: BOWL_POS.clone().add(new THREE.Vector3(0, 0.02, narrow ? 0.05 : 0.035)),
+  };
+};
+
 /* ---------- tweens ---------- */
 
 interface Tween {
@@ -186,6 +195,12 @@ const ui = {
   receiptRating: $('receipt-rating'),
   receiptBest: $('receipt-best'),
   btnAgain: $<HTMLButtonElement>('btn-again'),
+  btnCook: $<HTMLButtonElement>('btn-cook'),
+  cooked: $('cooked'),
+  cookedTitle: $('cooked-title'),
+  cookedSub: $('cooked-sub'),
+  btnReceipt: $<HTMLButtonElement>('btn-receipt'),
+  btnAgain2: $<HTMLButtonElement>('btn-again-2'),
 };
 const show = (el: HTMLElement, visible: boolean) => el.classList.toggle('hidden', !visible);
 
@@ -227,6 +242,11 @@ async function start() {
   const bowl = new Bowl(assets.bowl);
   bowl.group.position.copy(BOWL_POS);
   scene.add(bowl.group);
+
+  const cooked = new CookedPot();
+  cooked.group.position.copy(BOWL_POS);
+  scene.add(cooked.group);
+  let cookedReady = false;
 
   // Tongs: the group's origin sits at the gripping tips.
   const tongs = new THREE.Group();
@@ -578,13 +598,74 @@ async function start() {
     sfx.receipt(pct <= 10);
   }
 
+  async function cook() {
+    if (busy) return;
+    if (cookedReady) {
+      // Already cooked: just put the receipt away again.
+      show(ui.receipt, false);
+      show(ui.cooked, true);
+      mode = 'cooked';
+      return;
+    }
+    busy = true;
+    sfx.click();
+    show(ui.receipt, false);
+    show(ui.lcd, false);
+    const soup = ui.soup.value;
+    cooked.build(bowl.pieces, soup);
+    const n = bowl.pieces.length;
+    ui.cookedTitle.textContent = soup === 'Dry Mix Mala' ? 'Dry mix mala, tossed' : `${soup} malatang`;
+    ui.cookedSub.textContent = `${ui.receiptOrder.textContent?.split(' · ')[0] ?? 'Order'} is ready · ${n} piece${n === 1 ? '' : 's'}, ${(bowl.totalGrams / 1000).toFixed(3)} kg`;
+
+    // The raw bowl heads to the kitchen; the gold pot comes out steaming.
+    const p0 = bowl.group.position.clone();
+    const away = p0.clone().add(new THREE.Vector3(0.6, 0.25, -0.3));
+    await tween(0.45, (k) => bowl.group.position.lerpVectors(p0, away, k), easeIn);
+    bowl.group.visible = false;
+    bowl.group.position.copy(p0);
+    const cam = moveCamera(cookedView(), 1.2);
+    const above = BOWL_POS.clone().setY(BOWL_POS.y + 0.35);
+    cooked.group.visible = true;
+    cooked.group.position.copy(above);
+    cooked.group.scale.setScalar(0.9);
+    await wait(0.35);
+    await tween(0.6, (k) => {
+      cooked.group.position.lerpVectors(above, BOWL_POS, k);
+      cooked.group.scale.setScalar(0.9 + 0.1 * k);
+    }, easeIn);
+    sfx.drop();
+    await cam;
+    cookedReady = true;
+    ui.btnCook.textContent = 'Back to my bowl';
+    show(ui.cooked, true);
+    sfx.receipt(true);
+    mode = 'cooked';
+    busy = false;
+  }
+
+  function reopenReceipt() {
+    if (busy) return;
+    sfx.click();
+    show(ui.cooked, false);
+    show(ui.receipt, true);
+    mode = 'receipt';
+  }
+
   async function newBowl() {
     if (busy) return;
     busy = true;
     sfx.click();
     show(ui.receipt, false);
     show(ui.lcd, false);
+    show(ui.cooked, false);
     bowl.clear();
+    ui.btnCook.textContent = 'Cook my bowl';
+    if (cookedReady) {
+      cookedReady = false;
+      cooked.group.visible = false;
+      cooked.clear();
+      bowl.group.visible = true;
+    }
     const p0 = bowl.group.position.clone();
     const up = p0.clone().setY(p0.y + 0.16);
     const over = BOWL_POS.clone().setY(BOWL_POS.y + 0.16);
@@ -637,6 +718,9 @@ async function start() {
     void weigh();
   });
   ui.btnAgain.addEventListener('click', () => void newBowl());
+  ui.btnAgain2.addEventListener('click', () => void newBowl());
+  ui.btnCook.addEventListener('click', () => void cook());
+  ui.btnReceipt.addEventListener('click', reopenReceipt);
 
   window.addEventListener('keydown', (event) => {
     if (event.target instanceof HTMLInputElement || event.target instanceof HTMLSelectElement) {
@@ -647,7 +731,8 @@ async function start() {
     if (k === 'i') void setInspect(mode !== 'inspect');
     else if (k === 'z' && mode === 'pick') void removePiece(bowl.pieces[bowl.pieces.length - 1]);
     else if (k === 'enter' && mode === 'pick') openGuess();
-    else if (k === 'enter' && mode === 'receipt') void newBowl();
+    else if (k === 'enter' && mode === 'receipt') void cook();
+    else if (k === 'enter' && mode === 'cooked') void newBowl();
     else if (k === 'escape' && mode === 'inspect') void setInspect(false);
     else if (k === 'escape' && mode === 'guess') closeGuess();
     else if (k === 'm') toast(sfx.toggleMute() ? 'Sound off' : 'Sound on');
@@ -730,7 +815,13 @@ async function start() {
     last = now;
     if (tweens.length > 0) shadowFrames = 2;
     if (resize() && cameraMoves === 0) {
-      const view = mode === 'inspect' ? inspectView() : mode === 'pick' || mode === 'guess' ? wallView() : scaleView();
+      const view = cookedReady
+        ? cookedView()
+        : mode === 'inspect'
+          ? inspectView()
+          : mode === 'pick' || mode === 'guess'
+            ? wallView()
+            : scaleView();
       camPos.copy(view.pos);
       camLook.copy(view.look);
     }
@@ -749,6 +840,12 @@ async function start() {
     else {
       canvas.style.cursor = '';
       clickQueued = false;
+    }
+
+    if (cooked.group.visible) {
+      cooked.softSteam = pixelMode;
+      cooked.update(dt);
+      shadowFrames = Math.max(shadowFrames, 1);
     }
 
     tongsOpen += (tongsOpenTarget - tongsOpen) * (1 - Math.exp(-30 * dt));
@@ -773,7 +870,28 @@ async function start() {
   refreshHud();
   if (import.meta.env.DEV) {
     Object.assign(window, {
-      __malatang: { scene, camera, camPos, camLook, renderer, bowl, world, tongs, assets, state: () => ({ mode, busy, pieces: bowl.pieces.length }) },
+      __malatang: {
+        /** Dev only: skip straight to the finished bowl with the current picks. */
+        serve: (soup: string) => {
+          ui.soup.value = soup;
+          cooked.build(bowl.pieces, soup);
+          cooked.group.visible = true;
+          cooked.group.position.copy(BOWL_POS);
+          bowl.group.visible = false;
+          tongs.visible = false;
+          cookedReady = true;
+          mode = 'cooked';
+          ui.cookedTitle.textContent = `${soup} malatang`;
+          show(ui.bar, false);
+          show(ui.hint, false);
+          show(ui.receipt, false);
+          show(ui.lcd, false);
+          show(ui.cooked, true);
+          const view = cookedView();
+          camPos.copy(view.pos);
+          camLook.copy(view.look);
+        },
+        cooked, scene, camera, camPos, camLook, renderer, bowl, world, tongs, assets, state: () => ({ mode, busy, pieces: bowl.pieces.length }) },
     });
   }
   requestAnimationFrame(frame);
