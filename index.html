@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Malatang — Guess the Bill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+
+    <div id="loading">
+      <div class="loading-card">
+        <p id="loading-text">Stocking the fridge…</p>
+        <div class="progress"><div id="loading-bar"></div></div>
+      </div>
+    </div>
+
+    <div id="top">
+      <div id="rate" class="chip hidden"></div>
+      <button id="btn-style" class="btn ghost small hidden">Pixel version</button>
+    </div>
+    <div id="label" class="hidden"></div>
+    <div id="toast" class="hidden"></div>
+
+    <div id="bar" class="hidden">
+      <button id="btn-inspect" class="btn">Inspect bowl</button>
+      <span id="count" class="chip">Bowl is empty</span>
+      <button id="btn-undo" class="btn ghost" title="Put the last piece back (Z)">Undo</button>
+      <button id="btn-weigh" class="btn primary" disabled>Weigh it</button>
+    </div>
+    <p id="hint" class="hidden">Click a tray to grab with the tongs · hold to keep grabbing</p>
+
+    <aside id="inspect" class="panel hidden">
+      <header>
+        <h2>In your bowl</h2>
+        <button id="inspect-close" class="btn ghost small">Back to the fridge</button>
+      </header>
+      <ul id="inspect-list"></ul>
+      <p class="muted">Hover a piece to see what it is. Click it to put it back.</p>
+    </aside>
+
+    <div id="guess" class="overlay hidden">
+      <form id="guess-form" class="dialog">
+        <h2>Before it hits the scale…</h2>
+        <p class="muted">How much is this bowl going to cost, before tax?</p>
+        <label class="money">
+          <span>$</span>
+          <input id="guess-input" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00" required />
+        </label>
+        <label class="soup">
+          Soup base <span class="muted">(free)</span>
+          <select id="soup"></select>
+        </label>
+        <div class="row">
+          <button type="button" id="guess-cancel" class="btn ghost">Keep picking</button>
+          <button type="submit" class="btn primary">Weigh it</button>
+        </div>
+      </form>
+    </div>
+
+    <div id="lcd" class="hidden">
+      <div><span class="lcd-label">WEIGHT kg</span><span id="lcd-weight" class="lcd-value">0.000</span></div>
+      <div><span class="lcd-label">$/100g</span><span id="lcd-rate" class="lcd-value">0.00</span></div>
+      <div><span class="lcd-label">TOTAL $</span><span id="lcd-total" class="lcd-value">0.00</span></div>
+    </div>
+
+    <div id="receipt" class="overlay clear hidden">
+      <div class="paper">
+        <h2>MALATANG · BY WEIGHT</h2>
+        <p class="center" id="receipt-order"></p>
+        <ul id="receipt-items"></ul>
+        <hr />
+        <dl id="receipt-totals"></dl>
+        <hr />
+        <dl id="receipt-guess"></dl>
+        <p id="receipt-rating"></p>
+        <p id="receipt-best" class="center"></p>
+        <button id="btn-again" class="btn primary">New bowl</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

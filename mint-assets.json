@@ -1,0 +1,1994 @@
+{
+  "registryVersion": 1,
+  "mintProject": {
+    "projectId": "zd799sb9wthkqcfkzaecz3xsms8jcqf4",
+    "name": "Malatang Guess the Bill"
+  },
+  "assetRoot": "public/assets/mint",
+  "assets": {
+    "bean-sprouts": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks70qjexzww10gx0trq8spqgn98jcgjt"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "bean-sprouts-n98jcgjt-optimized.glb",
+          "localPath": "public/assets/mint/bean-sprouts/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 704832,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "bean-sprouts-n98jcgjt-preview.webp",
+          "localPath": "public/assets/mint/bean-sprouts/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 100060
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/bean-sprouts/preview_image.webp"
+    },
+    "beef-slice": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks74fdh43a5fvmt36edac1je9d8jckaf"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "beef-slice-9d8jckaf-optimized.glb",
+          "localPath": "public/assets/mint/beef-slice/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 1522168,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "beef-slice-9d8jckaf-preview.webp",
+          "localPath": "public/assets/mint/beef-slice/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 69918
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/beef-slice/preview_image.webp"
+    },
+    "bok-choy": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks7cb33jyagq7xx6atj4hk0zeh8jctp5"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "bok-choy-eh8jctp5-optimized.glb",
+          "localPath": "public/assets/mint/bok-choy/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 602184,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "bok-choy-eh8jctp5-preview.webp",
+          "localPath": "public/assets/mint/bok-choy/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 43594
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/bok-choy/preview_image.webp"
+    },
+    "broccoli": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks70m696ym6dxtjcbs18q0xp2h8jce9v"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "broccoli-2h8jce9v-optimized.glb",
+          "localPath": "public/assets/mint/broccoli/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 2158004,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "broccoli-2h8jce9v-preview.webp",
+          "localPath": "public/assets/mint/broccoli/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 90222
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/broccoli/preview_image.webp"
+    },
+    "chicken-slice": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks72cxt481e281k2v6fwz68fcx8jdgjp"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "chicken-slice-cx8jdgjp-optimized.glb",
+          "localPath": "public/assets/mint/chicken-slice/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 330672,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "chicken-slice-cx8jdgjp-preview.webp",
+          "localPath": "public/assets/mint/chicken-slice/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 35752
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/chicken-slice/preview_image.webp"
+    },
+    "crab-stick": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks75b18t13z8vpyfek2ernxk798jdz3y"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "crab-stick-798jdz3y-optimized.glb",
+          "localPath": "public/assets/mint/crab-stick/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 527620,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "crab-stick-798jdz3y-preview.webp",
+          "localPath": "public/assets/mint/crab-stick/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 40510
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/crab-stick/preview_image.webp"
+    },
+    "digital-scale": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks70h6yjd7ayf4jzb3x4ejbm0s8jcjqv"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "digital-scale-0s8jcjqv-optimized.glb",
+          "localPath": "public/assets/mint/digital-scale/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 594476,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "digital-scale-0s8jcjqv-preview.webp",
+          "localPath": "public/assets/mint/digital-scale/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 35106
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/digital-scale/preview_image.webp"
+    },
+    "enoki-mushroom": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks72rdmzwkxmdy1a11knm2etmh8jdyz0"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "enoki-mushroom-mh8jdyz0-optimized.glb",
+          "localPath": "public/assets/mint/enoki-mushroom/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 943740,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "enoki-mushroom-mh8jdyz0-preview.webp",
+          "localPath": "public/assets/mint/enoki-mushroom/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 45346
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/enoki-mushroom/preview_image.webp"
+    },
+    "fatty-beef-slice": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks78b0vp67zeakg45kxrgqx3j58jd2bp"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "fatty-beef-slice-j58jd2bp-optimized.glb",
+          "localPath": "public/assets/mint/fatty-beef-slice/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 1086312,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "fatty-beef-slice-j58jd2bp-preview.webp",
+          "localPath": "public/assets/mint/fatty-beef-slice/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 63204
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/fatty-beef-slice/preview_image.webp"
+    },
+    "firm-tofu": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks70h3zgkn6rcpmt9pc7fq7fx18jcqbj"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "firm-tofu-x18jcqbj-optimized.glb",
+          "localPath": "public/assets/mint/firm-tofu/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 218576,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "firm-tofu-x18jcqbj-preview.webp",
+          "localPath": "public/assets/mint/firm-tofu/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 22552
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/firm-tofu/preview_image.webp"
+    },
+    "fish-ball": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks770he8yb901zswtq5acvp5vn8jcd14"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "fish-ball-vn8jcd14-optimized.glb",
+          "localPath": "public/assets/mint/fish-ball/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 230380,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "fish-ball-vn8jcd14-preview.webp",
+          "localPath": "public/assets/mint/fish-ball/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 22794
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/fish-ball/preview_image.webp"
+    },
+    "fish-tofu-roll": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks744prankbxg5wj93pkq10cx98jdy6j"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "fish-tofu-roll-x98jdy6j-optimized.glb",
+          "localPath": "public/assets/mint/fish-tofu-roll/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 512488,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "fish-tofu-roll-x98jdy6j-preview.webp",
+          "localPath": "public/assets/mint/fish-tofu-roll/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 48378
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/fish-tofu-roll/preview_image.webp"
+    },
+    "fried-tofu-puff": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks707ksp4sj6terrtdt5k171f98jcd1a"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "fried-tofu-puff-f98jcd1a-optimized.glb",
+          "localPath": "public/assets/mint/fried-tofu-puff/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 523020,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "fried-tofu-puff-f98jcd1a-preview.webp",
+          "localPath": "public/assets/mint/fried-tofu-puff/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 76214
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/fried-tofu-puff/preview_image.webp"
+    },
+    "glass-noodles": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks7e61besrcdcnv9mq83p414pd8jdk53"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "glass-noodles-pd8jdk53-optimized.glb",
+          "localPath": "public/assets/mint/glass-noodles/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 652448,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "glass-noodles-pd8jdk53-preview.webp",
+          "localPath": "public/assets/mint/glass-noodles/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 65708
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/glass-noodles/preview_image.webp"
+    },
+    "hot-pot-bowl": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks70gzabe0zfecdzybwhmbm0kd8jc5m7"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "hot-pot-bowl-kd8jc5m7-optimized.glb",
+          "localPath": "public/assets/mint/hot-pot-bowl/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 364080,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "hot-pot-bowl-kd8jc5m7-preview.webp",
+          "localPath": "public/assets/mint/hot-pot-bowl/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 32720
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/hot-pot-bowl/preview_image.webp"
+    },
+    "instant-noodle-block": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks79qw65cyye5ereg4mhnq1b858jd3d3"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "instant-noodle-block-858jd3d3-optimized.glb",
+          "localPath": "public/assets/mint/instant-noodle-block/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 1782496,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "instant-noodle-block-858jd3d3-preview.webp",
+          "localPath": "public/assets/mint/instant-noodle-block/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 97050
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/instant-noodle-block/preview_image.webp"
+    },
+    "lamb-roll-slice": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks72sdfqggdmhkehkbzczdms6x8jdbcd"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "lamb-roll-slice-6x8jdbcd-optimized.glb",
+          "localPath": "public/assets/mint/lamb-roll-slice/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 609288,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "lamb-roll-slice-6x8jdbcd-preview.webp",
+          "localPath": "public/assets/mint/lamb-roll-slice/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 60984
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/lamb-roll-slice/preview_image.webp"
+    },
+    "lotus-root-slice": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks7e4azq05pr57yah81n0tcaad8jdrxv"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "lotus-root-slice-ad8jdrxv-optimized.glb",
+          "localPath": "public/assets/mint/lotus-root-slice/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 541236,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "lotus-root-slice-ad8jdrxv-preview.webp",
+          "localPath": "public/assets/mint/lotus-root-slice/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 58934
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/lotus-root-slice/preview_image.webp"
+    },
+    "mini-sausage": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks74m12fmapwngrremy6jejrvs8jczmr"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "mini-sausage-vs8jczmr-optimized.glb",
+          "localPath": "public/assets/mint/mini-sausage/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 406604,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "mini-sausage-vs8jczmr-preview.webp",
+          "localPath": "public/assets/mint/mini-sausage/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 22934
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/mini-sausage/preview_image.webp"
+    },
+    "napa-cabbage": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks71bkhceash549x3v9cs7cnds8jdmy4"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "napa-cabbage-ds8jdmy4-optimized.glb",
+          "localPath": "public/assets/mint/napa-cabbage/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 420116,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "napa-cabbage-ds8jdmy4-preview.webp",
+          "localPath": "public/assets/mint/napa-cabbage/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 48296
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/napa-cabbage/preview_image.webp"
+    },
+    "pork-belly-slice": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks760gfzmh8d0sajxan7f6hd1x8jcqte"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "pork-belly-slice-1x8jcqte-optimized.glb",
+          "localPath": "public/assets/mint/pork-belly-slice/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 686916,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "pork-belly-slice-1x8jcqte-preview.webp",
+          "localPath": "public/assets/mint/pork-belly-slice/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 46908
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/pork-belly-slice/preview_image.webp"
+    },
+    "pork-blood-curd": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks70dt9p9tg84046gq9q3fqebs8jcmfa"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "pork-blood-curd-bs8jcmfa-optimized.glb",
+          "localPath": "public/assets/mint/pork-blood-curd/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 213240,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "pork-blood-curd-bs8jcmfa-preview.webp",
+          "localPath": "public/assets/mint/pork-blood-curd/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 25992
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/pork-blood-curd/preview_image.webp"
+    },
+    "serving-tongs": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks7a2w5sshqgd3c12w9n40rm758jcj70"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "serving-tongs-758jcj70-optimized.glb",
+          "localPath": "public/assets/mint/serving-tongs/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 716128,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "serving-tongs-758jcj70-preview.webp",
+          "localPath": "public/assets/mint/serving-tongs/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 45796
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/serving-tongs/preview_image.webp"
+    },
+    "shiitake-mushroom": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks776gkm19mc2g33wvw9mp1c3x8jczbs"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "shiitake-mushroom-3x8jczbs-optimized.glb",
+          "localPath": "public/assets/mint/shiitake-mushroom/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 937344,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "shiitake-mushroom-3x8jczbs-preview.webp",
+          "localPath": "public/assets/mint/shiitake-mushroom/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 69634
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/shiitake-mushroom/preview_image.webp"
+    },
+    "shimeji-mushroom": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks75pxe7fk4jv9zxfna7yw3bq58jdx66"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "shimeji-mushroom-q58jdx66-optimized.glb",
+          "localPath": "public/assets/mint/shimeji-mushroom/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 785144,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "shimeji-mushroom-q58jdx66-preview.webp",
+          "localPath": "public/assets/mint/shimeji-mushroom/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 43760
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/shimeji-mushroom/preview_image.webp"
+    },
+    "shrimp": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks77e5dh0hn39y6v2vfcjsvbe98jc5nk"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "shrimp-e98jc5nk-optimized.glb",
+          "localPath": "public/assets/mint/shrimp/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 2074612,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "shrimp-e98jc5nk-preview.webp",
+          "localPath": "public/assets/mint/shrimp/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 109984
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/shrimp/preview_image.webp"
+    },
+    "snow-peas": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks72wknk4vp486d6qhvh3z3b0n8jcnsp"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "snow-peas-0n8jcnsp-optimized.glb",
+          "localPath": "public/assets/mint/snow-peas/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 652684,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "snow-peas-0n8jcnsp-preview.webp",
+          "localPath": "public/assets/mint/snow-peas/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 24854
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/snow-peas/preview_image.webp"
+    },
+    "spinach": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks79tr71x1dc34jnvr2xxeawwd8jds69"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "spinach-wd8jds69-optimized.glb",
+          "localPath": "public/assets/mint/spinach/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 697220,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "spinach-wd8jds69-preview.webp",
+          "localPath": "public/assets/mint/spinach/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 50390
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/spinach/preview_image.webp"
+    },
+    "striped-fish-dumpling": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks71shescqfv5wvjmv463p4ynh8jctcr"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "striped-fish-dumpling-nh8jctcr-optimized.glb",
+          "localPath": "public/assets/mint/striped-fish-dumpling/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 384404,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "striped-fish-dumpling-nh8jctcr-preview.webp",
+          "localPath": "public/assets/mint/striped-fish-dumpling/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 30938
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/striped-fish-dumpling/preview_image.webp"
+    },
+    "tofu-skin": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks75ea2ca5faxqfpv9zct521pn8jd3f0"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "tofu-skin-pn8jd3f0-optimized.glb",
+          "localPath": "public/assets/mint/tofu-skin/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 888364,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "tofu-skin-pn8jd3f0-preview.webp",
+          "localPath": "public/assets/mint/tofu-skin/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 39412
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/tofu-skin/preview_image.webp"
+    },
+    "udon-noodles": {
+      "source": {
+        "manifestVersion": 1,
+        "kind": "asset",
+        "assetType": "model",
+        "assetId": "ks75bm6bvtrczwahf3k4ax10q98jdrzm"
+      },
+      "transform": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "mode": "local_files",
+      "artifacts": {
+        "optimized_glb": {
+          "artifactId": "optimized_glb",
+          "role": "canonical_model",
+          "format": "glb",
+          "contentType": "model/gltf-binary",
+          "filename": "udon-noodles-q98jdrzm-optimized.glb",
+          "localPath": "public/assets/mint/udon-noodles/optimized_glb.glb",
+          "loaderHint": "gltf",
+          "byteSize": 542264,
+          "extensionsUsed": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "extensionsRequired": [
+            "EXT_texture_webp",
+            "KHR_draco_mesh_compression"
+          ],
+          "usesDraco": true,
+          "requiresDraco": true,
+          "usesMeshopt": false,
+          "requiresMeshopt": false,
+          "usesKtx2": false,
+          "requiresKtx2": false,
+          "unknownRequiredExtensions": []
+        },
+        "preview_image": {
+          "artifactId": "preview_image",
+          "role": "preview_image",
+          "format": "webp",
+          "contentType": "image/webp",
+          "filename": "udon-noodles-q98jdrzm-preview.webp",
+          "localPath": "public/assets/mint/udon-noodles/preview_image.webp",
+          "loaderHint": "image",
+          "byteSize": 41394
+        }
+      },
+      "thumbnailUrl": "public/assets/mint/udon-noodles/preview_image.webp"
+    }
+  }
+}
