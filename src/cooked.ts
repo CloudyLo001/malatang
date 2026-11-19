@@ -398,7 +398,9 @@ export class CookedPot {
         object.position.set(0, 0, 0);
         object.scale.setScalar(1);
         object.rotation.set(rand(-0.18, 0.18), rand(0, Math.PI * 2), rand(-0.18, 0.18), 'YXZ');
-        if (WILT.has(key)) object.scale.set(0.88, 0.55, 0.88);
+        // Cooking shrinks everything a little; leafy greens wilt flat.
+        if (WILT.has(key)) object.scale.set(0.82, 0.5, 0.82);
+        else object.scale.setScalar(0.88);
         object.traverse((child) => {
           const mesh = child as THREE.Mesh;
           if (!mesh.isMesh) return;
@@ -417,7 +419,7 @@ export class CookedPot {
         const corner = Math.hypot(hx, hz);
 
         let best: { x: number; z: number; y: number } | null = null;
-        for (let i = 0; i < 26; i += 1) {
+        for (let i = 0; i < 40; i += 1) {
           // Mostly inside this ingredient's wedge; anywhere in the pot once the wedge is heaped.
           const a = i < 12 ? angle + rand(0.08, 0.92) * wedge : rand(0, Math.PI * 2);
           const r = Math.sqrt(Math.random()) * (R - 0.004);
@@ -426,9 +428,11 @@ export class CookedPot {
           const y = support(x, z, hx, hz);
           // The whole footprint must clear the flared wall at the height it would rest at.
           if (r + corner > radiusAt(Math.min(y, POT_H)) - 0.004) continue;
-          if (!best || y < best.y) best = { x, z, y };
+          if (!best || y + size.y < best.y + size.y) best = { x, z, y };
         }
-        if (!best) continue; // no room left without overlapping: leave it out of the photo
+        // A heap may crown just above the rim; anything that would go higher stays submerged
+        // under the broth and noodles instead of stacking into a tower.
+        if (!best || best.y + size.y > POT_H + 0.06) continue;
         object.position.set(best.x - centre.x, best.y - box.min.y, best.z - centre.z);
         stampRect(best.x, best.z, hx, hz, best.y + size.y);
         this.contents.add(object);
