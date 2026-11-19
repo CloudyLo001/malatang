@@ -425,7 +425,8 @@ export class CookedPot {
           const r = Math.sqrt(Math.random()) * (R - 0.004);
           const x = Math.cos(a) * r;
           const z = Math.sin(a) * r;
-          const y = support(x, z, hx, hz);
+          // Nestle a third of the way into whatever is below, but never under the broth bed.
+          const y = Math.max(pileY - 0.014, support(x, z, hx, hz) - size.y * 0.35);
           // The whole footprint must clear the flared wall at the height it would rest at.
           if (r + corner > radiusAt(Math.min(y, POT_H)) - 0.004) continue;
           if (!best || y + size.y < best.y + size.y) best = { x, z, y };

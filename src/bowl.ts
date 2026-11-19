@@ -23,6 +23,8 @@ const GRID = 40;
 const BASIN = 0.9;
 /** Most a piece leans to follow the slope under it, radians. */
 const MAX_LEAN = 0.75;
+/** How deep a piece may nestle into the food below it, as a fraction of its own height. */
+const NESTLE = 0.35;
 /** How far a heap may rise above the rim before the bowl counts as full, metres. */
 const HEAP = 0.11;
 
@@ -30,9 +32,8 @@ const UP = new THREE.Vector3(0, 1, 0);
 
 /**
  * The customer's bowl. Pieces are packed on a height field sampled from the real bowl mesh.
- * Every piece is rasterised into the same grid as its own underside/top profile, so it comes to
- * rest exactly where its underside first touches the bowl or the food below: nothing overlaps
- * and nothing passes through the bowl. Pieces lean with the slope beneath them, like food
+ * Every piece is rasterised into the same grid as its own underside/top profile. Pieces nestle
+ * partly into the food below them, but no part of a piece ever goes beneath the bowl's surface. Pieces lean with the slope beneath them, like food
  * sliding against the side of a real bowl.
  */
 export class Bowl {
@@ -43,6 +44,8 @@ export class Bowl {
   private readonly contents = new THREE.Group();
   /** Inner surface height per cell; NaN where the cell is rim or outside the bowl. */
   private readonly floor = new Float32Array(GRID * GRID);
+  /** Highest bowl surface anywhere within each cell (the walls slope across a cell). */
+  private readonly floorMax = new Float32Array(GRID * GRID);
   private readonly pile = new Float32Array(GRID * GRID);
   private readonly cell: number;
   private readonly vertexCache = new Map<Proto, Float32Array>();
@@ -55,6 +58,25 @@ export class Bowl {
     shell.position.y = this.height / 2;
     this.group.add(shell, this.contents);
     this.sampleFloor(shell);
+    for (let iz = 0; iz < GRID; iz += 1) {
+      for (let ix = 0; ix < GRID; ix += 1) {
+        const c = iz * GRID + ix;
+        let m = this.floor[c];
+        if (!Number.isNaN(m)) {
+          // Halfway to each neighbour bounds the surface inside this cell.
+          for (let dz = -1; dz <= 1; dz += 1) {
+            for (let dx = -1; dx <= 1; dx += 1) {
+              const nx = ix + dx;
+              const nz = iz + dz;
+              if (nx < 0 || nz < 0 || nx >= GRID || nz >= GRID) continue;
+              const n = this.floor[nz * GRID + nx];
+              m = Math.max(m, Number.isNaN(n) ? this.floor[c] : (this.floor[c] + n) / 2);
+            }
+          }
+        }
+        this.floorMax[c] = m;
+      }
+    }
     this.resetPile();
   }
 
@@ -108,7 +130,7 @@ export class Bowl {
   }
 
   private resetPile() {
-    this.pile.set(this.floor);
+    this.pile.set(this.floorMax);
   }
 
   /** Every vertex of a model, relative to its origin (cached per model). */
@@ -163,11 +185,23 @@ export class Bowl {
     return { cells, bottom, top };
   }
 
-  /** Origin height at which the footprint's underside first touches what is below. */
+  /**
+   * Origin height for a footprint: it may nestle into the food below, but its underside never
+   * goes beneath the bowl's own surface.
+   */
   private restHeight(fp: Footprint): number {
-    let y = -Infinity;
-    for (let k = 0; k < fp.cells.length; k += 1) y = Math.max(y, this.pile[fp.cells[k]] - fp.bottom[k]);
-    return y;
+    let onBowl = -Infinity;
+    let onFood = -Infinity;
+    let lo = Infinity;
+    let hi = -Infinity;
+    for (let k = 0; k < fp.cells.length; k += 1) {
+      const c = fp.cells[k];
+      onBowl = Math.max(onBowl, this.floorMax[c] - fp.bottom[k]);
+      onFood = Math.max(onFood, this.pile[c] - fp.bottom[k]);
+      lo = Math.min(lo, fp.bottom[k]);
+      hi = Math.max(hi, fp.top[k]);
+    }
+    return Math.max(onBowl, onFood - (hi - lo) * NESTLE);
   }
 
   private stamp(fp: Footprint, originY: number) {
