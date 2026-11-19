@@ -299,6 +299,8 @@ export class CookedPot {
     this.soup.position.y = surfaceY;
     // Dry mix sits as a tossed heap above a shallow glaze; soups float everything at the surface.
     const pileY = Math.max(surfaceY, POT_H * 0.45);
+    /** Soups float and drown things in broth; dry mix is a tossed heap. */
+    const wet = style.level >= 0.3;
 
     // Height field over the pot so ingredients heap on top of each other.
     const GRID = 26;
@@ -353,12 +355,14 @@ export class CookedPot {
             heading += Math.PI * 0.6;
           }
           const crinkle = Math.sin(i * 2.9) * 0.003 * spec.wave;
-          pts.push(new THREE.Vector3(x + crinkle, pileY + rand(-0.004, 0.0035), z - crinkle));
+          // In broth the noodles drift just under the surface, breaking through here and there.
+          const ny = wet ? surfaceY + rand(-0.013, 0.0015) : pileY + rand(-0.004, 0.0035);
+          pts.push(new THREE.Vector3(x + crinkle, ny, z - crinkle));
         }
         const curve = new THREE.CatmullRomCurve3(pts);
         list.push(new THREE.TubeGeometry(curve, steps * 3, spec.radius, 5, false));
         // Noodles lift whatever lands on them a little.
-        pts.forEach((p) => stamp(p.x, p.z, spec.radius + 0.003, pileY + 0.004 + spec.radius * 2));
+        if (!wet) pts.forEach((p) => stamp(p.x, p.z, spec.radius + 0.003, pileY + 0.004 + spec.radius * 2));
       }
       strandGeoms.set(piece.item.key, list);
     }
@@ -418,6 +422,8 @@ export class CookedPot {
         const hz = size.z / 2;
         const corner = Math.hypot(hx, hz);
 
+        // How much of this piece is under the broth: some barely float, some only poke out.
+        const sink = Math.random() < 0.35 ? rand(0.7, 0.88) : rand(0.3, 0.6);
         let best: { x: number; z: number; y: number } | null = null;
         for (let i = 0; i < 40; i += 1) {
           // Mostly inside this ingredient's wedge; anywhere in the pot once the wedge is heaped.
@@ -426,7 +432,12 @@ export class CookedPot {
           const x = Math.cos(a) * r;
           const z = Math.sin(a) * r;
           // Nestle a third of the way into whatever is below, but never under the broth bed.
-          const y = Math.max(pileY - 0.014, support(x, z, hx, hz) - size.y * 0.35);
+          const below = support(x, z, hx, hz);
+          const y = wet
+            ? // Sit in the broth at this piece's own depth; ride up a little only when crowded.
+              Math.max(surfaceY - size.y * sink, below - size.y * 0.6, 0.008)
+            : // Nestle a third of the way into whatever is below, but never under the glaze.
+              Math.max(pileY - 0.014, below - size.y * 0.35);
           // The whole footprint must clear the flared wall at the height it would rest at.
           if (r + corner > radiusAt(Math.min(y, POT_H)) - 0.004) continue;
           if (!best || y + size.y < best.y + size.y) best = { x, z, y };
