@@ -237,6 +237,7 @@ export class CookedPot {
     this.soupMaterial = new THREE.MeshStandardMaterial({ roughness: 0.14, metalness: 0, transparent: true, depthWrite: false });
     this.soup = new THREE.Mesh(new THREE.CircleGeometry(1, 96).rotateX(-Math.PI / 2), this.soupMaterial);
     this.soup.renderOrder = 2;
+    this.soup.name = 'soup';
     this.soup.receiveShadow = true;
 
     const steamMap = steamTexture();
@@ -352,7 +353,7 @@ export class CookedPot {
           pts.push(new THREE.Vector3(x + crinkle, pileY + rand(-0.004, 0.0035), z - crinkle));
         }
         const curve = new THREE.CatmullRomCurve3(pts);
-        list.push(new THREE.TubeGeometry(curve, steps * 3, spec.radius, 5, false));
+        list.push(new THREE.TubeGeometry(curve, steps * 2, spec.radius, 4, false));
         // Noodles lift whatever lands on them a little.
         pts.forEach((p) => stamp(p.x, p.z, spec.radius * 2 + 0.004, pileY + 0.003));
       }
@@ -369,7 +370,7 @@ export class CookedPot {
         new THREE.MeshStandardMaterial({ color, roughness: 0.32, transparent: spec.opacity < 1, opacity: spec.opacity }),
       );
       mesh.userData.ownGeometry = true;
-      mesh.castShadow = true;
+      mesh.castShadow = false;
       mesh.receiveShadow = true;
       this.contents.add(mesh);
     }
@@ -401,7 +402,7 @@ export class CookedPot {
           mesh.material = Array.isArray(mesh.material)
             ? mesh.material.map((m) => this.cookMaterial(m, tint))
             : this.cookMaterial(mesh.material, tint);
-          mesh.castShadow = true;
+          mesh.castShadow = false;
           mesh.receiveShadow = true;
         });
         object.updateMatrixWorld(true);
@@ -475,7 +476,7 @@ export class CookedPot {
         if (colors) mesh.setColorAt(i, colors(i));
       }
       mesh.userData.ownGeometry = true;
-      mesh.castShadow = true;
+      mesh.castShadow = false;
       this.contents.add(mesh);
       return mesh;
     };
