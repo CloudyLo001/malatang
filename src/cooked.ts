@@ -303,24 +303,28 @@ export class CookedPot {
     // Height field over the pot so ingredients heap on top of each other.
     const GRID = 26;
     const cell = (i: number) => ((i + 0.5) / GRID - 0.5) * 2 * R;
-    const field = new Float32Array(GRID * GRID).fill(pileY - 0.012);
-    const sample = (x: number, z: number, fp: number) => {
-      let top = pileY - 0.02;
-      for (let iz = 0; iz < GRID; iz += 1) {
-        for (let ix = 0; ix < GRID; ix += 1) {
-          if (Math.hypot(cell(ix) - x, cell(iz) - z) <= fp) top = Math.max(top, field[iz * GRID + ix]);
-        }
-      }
+    // The broth and noodle bed below the surface is the floor everything rests on.
+    const field = new Float32Array(GRID * GRID).fill(pileY - 0.014);
+    const span = (c: number, half: number) => [
+      Math.max(0, Math.floor(((c - half) / (2 * R) + 0.5) * GRID)),
+      Math.min(GRID - 1, Math.floor(((c + half) / (2 * R) + 0.5) * GRID)),
+    ];
+    /** Highest point under an axis-aligned footprint (pieces rest on it, never inside it). */
+    const support = (x: number, z: number, hx: number, hz: number) => {
+      const [x0, x1] = span(x, hx);
+      const [z0, z1] = span(z, hz);
+      let top = -Infinity;
+      for (let iz = z0; iz <= z1; iz += 1) for (let ix = x0; ix <= x1; ix += 1) top = Math.max(top, field[iz * GRID + ix]);
       return top;
     };
-    const stamp = (x: number, z: number, fp: number, top: number) => {
-      for (let iz = 0; iz < GRID; iz += 1) {
-        for (let ix = 0; ix < GRID; ix += 1) {
-          const i = iz * GRID + ix;
-          if (Math.hypot(cell(ix) - x, cell(iz) - z) <= fp) field[i] = Math.max(field[i], top);
-        }
+    const stampRect = (x: number, z: number, hx: number, hz: number, top: number) => {
+      const [x0, x1] = span(x, hx);
+      const [z0, z1] = span(z, hz);
+      for (let iz = z0; iz <= z1; iz += 1) {
+        for (let ix = x0; ix <= x1; ix += 1) field[iz * GRID + ix] = Math.max(field[iz * GRID + ix], top);
       }
     };
+    const stamp = (x: number, z: number, fp: number, top: number) => stampRect(x, z, fp, fp, top);
 
     // Noodles first: a tangled bed just under and across the surface.
     const noodlePieces = pieces.filter((p) => NOODLES[p.item.key]);
@@ -354,7 +358,7 @@ export class CookedPot {
         const curve = new THREE.CatmullRomCurve3(pts);
         list.push(new THREE.TubeGeometry(curve, steps * 3, spec.radius, 5, false));
         // Noodles lift whatever lands on them a little.
-        pts.forEach((p) => stamp(p.x, p.z, spec.radius * 2 + 0.004, pileY + 0.003));
+        pts.forEach((p) => stamp(p.x, p.z, spec.radius + 0.003, pileY + 0.004 + spec.radius * 2));
       }
       strandGeoms.set(piece.item.key, list);
     }
@@ -386,14 +390,14 @@ export class CookedPot {
     let angle = rand(0, Math.PI * 2);
     const white = new THREE.Color(0xffffff);
     for (const list of ordered) {
-      const span = (list.length / total) * Math.PI * 2;
+      const wedge = (list.length / total) * Math.PI * 2;
       const key = list[0].item.key;
       const tint = new THREE.Color(COOK_TINT[key] ?? 0xf4ebe0).multiply(white.clone().lerp(brothColor, style.coat));
       for (const piece of list) {
         const object = piece.object.clone();
         object.position.set(0, 0, 0);
         object.scale.setScalar(1);
-        object.rotation.set(rand(-0.25, 0.25), rand(0, Math.PI * 2), rand(-0.25, 0.25), 'YXZ');
+        object.rotation.set(rand(-0.18, 0.18), rand(0, Math.PI * 2), rand(-0.18, 0.18), 'YXZ');
         if (WILT.has(key)) object.scale.set(0.88, 0.55, 0.88);
         object.traverse((child) => {
           const mesh = child as THREE.Mesh;
@@ -405,33 +409,31 @@ export class CookedPot {
           mesh.receiveShadow = true;
         });
         object.updateMatrixWorld(true);
-        const box = new THREE.Box3().setFromObject(object);
+        const box = new THREE.Box3().setFromObject(object, true);
         const size = box.getSize(new THREE.Vector3());
-        const centreY = box.getCenter(new THREE.Vector3()).y;
-        const footprint = Math.max(0.01, (size.x + size.z) * 0.2);
+        const centre = box.getCenter(new THREE.Vector3());
+        const hx = size.x / 2;
+        const hz = size.z / 2;
+        const corner = Math.hypot(hx, hz);
 
-        const extent = Math.max(size.x, size.z) * 0.5;
-        const maxR = Math.max(0.02, R - 0.006 - extent);
         let best: { x: number; z: number; y: number } | null = null;
-        for (let i = 0; i < 16; i += 1) {
-          // Mostly inside this ingredient's wedge; spill into the neighbours if it is heaped.
-          const a = angle + rand(i < 10 ? 0.08 : -0.4, i < 10 ? 0.92 : 1.4) * span;
-          const r = rand(0.3, 1) * maxR;
+        for (let i = 0; i < 26; i += 1) {
+          // Mostly inside this ingredient's wedge; anywhere in the pot once the wedge is heaped.
+          const a = i < 12 ? angle + rand(0.08, 0.92) * wedge : rand(0, Math.PI * 2);
+          const r = Math.sqrt(Math.random()) * (R - 0.004);
           const x = Math.cos(a) * r;
           const z = Math.sin(a) * r;
-          const y = sample(x, z, footprint);
+          const y = support(x, z, hx, hz);
+          // The whole footprint must clear the flared wall at the height it would rest at.
+          if (r + corner > radiusAt(Math.min(y, POT_H)) - 0.004) continue;
           if (!best || y < best.y) best = { x, z, y };
         }
-        const b = best!;
-        // Sit roughly a third submerged in broth, or on top of whatever is already there.
-        // ...but never towering: a full pot just packs tighter rather than higher.
-        let bottom = Math.min(Math.max(b.y - size.y * 0.35, pileY - size.y * 0.5), pileY + 0.01);
-        bottom = Math.min(bottom, POT_H + 0.028 - size.y);
-        object.position.set(b.x, bottom + size.y / 2 - centreY, b.z);
-        stamp(b.x, b.z, footprint, bottom + size.y * 0.7);
+        if (!best) continue; // no room left without overlapping: leave it out of the photo
+        object.position.set(best.x - centre.x, best.y - box.min.y, best.z - centre.z);
+        stampRect(best.x, best.z, hx, hz, best.y + size.y);
         this.contents.add(object);
       }
-      angle += span;
+      angle += wedge;
     }
 
     // Garnish heaped in the middle, on top of everything.

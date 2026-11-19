@@ -5,7 +5,7 @@
   --line: rgba(246, 236, 221, 0.14);
   --chili: #e2452f;
   --gold: #f3c35a;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-family: 'Pixelify Sans', 'Courier New', monospace;
 }
 
 * {
@@ -110,7 +110,7 @@ body {
 
 .btn {
   font: inherit;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--ink);
   padding: 11px 20px;
@@ -464,7 +464,7 @@ body {
 }
 
 .lcd-value {
-  font-family: 'Consolas', 'Courier New', monospace;
+  font-family: inherit;
   font-size: 30px;
   font-weight: 700;
   color: #6dffa8;
@@ -480,8 +480,8 @@ body {
   padding: 22px 22px 18px;
   background: #fdfaf3;
   color: #231a14;
-  font-family: 'Consolas', 'Courier New', monospace;
-  font-size: 13px;
+  font-family: inherit;
+  font-size: 15px;
   border-radius: 4px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
   animation: print 0.5s ease-out;
@@ -543,7 +543,7 @@ body {
   margin: 12px 0 4px;
   padding: 10px;
   text-align: center;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: inherit;
   font-size: 17px;
   font-weight: 800;
   border-radius: 8px;
@@ -567,7 +567,7 @@ body {
 .paper .btn {
   width: 100%;
   margin-top: 8px;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: inherit;
 }
 
 @media (max-width: 640px) {

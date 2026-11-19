@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 
 /** Screen pixels covered by one art pixel. */
-const PIXEL_SIZE = 3;
-const MIN_ROWS = 200;
+const PIXEL_SIZE = 2;
+const MIN_ROWS = 300;
 /** The scene is rendered at this multiple of the art resolution and averaged down. */
 const SUPERSAMPLE = 2;
 
@@ -52,27 +52,28 @@ const fragmentShader = /* glsl */ `
 
     // Soft, slightly warm pastel grade.
     float luma = dot(c, vec3(0.299, 0.587, 0.114));
-    c = mix(vec3(luma), c, 1.55);
+    c = mix(vec3(luma), c, 1.3);
     c = mix(c, vec3(1.0, 0.9, 0.8), 0.05);
     c = clamp(c, 0.0, 1.0);
 
     // Flat banded shading (a whisper of dither hides banding seams), then a small palette.
     float dither = bayer(cell);
     luma = max(dot(c, vec3(0.299, 0.587, 0.114)), 0.001);
-    float bands = 7.0;
-    float banded = floor(luma * bands + 0.5 + dither * 0.12) / bands;
+    float bands = 12.0;
+    float banded = floor(luma * bands + 0.5 + dither * 0.08) / bands;
     c *= clamp(banded, 0.1, 1.0) / luma;
-    c = floor(clamp(c, 0.0, 1.0) * 10.0 + 0.5) / 10.0;
+    c = floor(clamp(c, 0.0, 1.0) * 18.0 + 0.5) / 18.0;
 
-    // Ink outline wherever this pixel sits clearly in front of a neighbour.
+    // Ink outline where this pixel sits clearly in front of a neighbour: object silhouettes and
+    // shelf edges, but not the small gaps between pieces inside a pile (that read as noise).
     float z = viewZ(uv);
     float gap = 0.0;
     gap = max(gap, viewZ(uv + vec2(px.x, 0.0)) - z);
     gap = max(gap, viewZ(uv - vec2(px.x, 0.0)) - z);
     gap = max(gap, viewZ(uv + vec2(0.0, px.y)) - z);
     gap = max(gap, viewZ(uv - vec2(0.0, px.y)) - z);
-    float edge = smoothstep(0.022, 0.04, gap);
-    c = mix(c, uInk, edge * 0.88);
+    float edge = smoothstep(0.045, 0.08, gap);
+    c = mix(c, uInk, edge * 0.85);
 
     gl_FragColor = vec4(c, 1.0);
   }
