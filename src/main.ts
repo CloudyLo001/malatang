@@ -23,10 +23,7 @@ const money = (value: number) => `$${value.toFixed(2)}`;
 
 const canvas = $<HTMLCanvasElement>('scene');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
-/** Highest render scale; the frame loop drops below it when the GPU cannot keep up. */
-const MAX_PIXEL_RATIO = Math.min(window.devicePixelRatio, 1.5);
-let pixelRatio = MAX_PIXEL_RATIO;
-renderer.setPixelRatio(pixelRatio);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.05;
@@ -83,7 +80,7 @@ const key = new THREE.DirectionalLight(0xfff0dc, 2.3);
 key.position.set(0.9, 3.1, 2.3);
 key.target.position.set(0, 0.95, -0.2);
 key.castShadow = true;
-key.shadow.mapSize.set(1024, 1024);
+key.shadow.mapSize.set(2048, 2048);
 key.shadow.camera.left = -1.6;
 key.shadow.camera.right = 1.6;
 key.shadow.camera.top = 1.5;
@@ -221,10 +218,9 @@ let viewH = 0;
 function resize(): boolean {
   const w = Math.max(1, window.innerWidth);
   const h = Math.max(1, window.innerHeight);
-  if (w === viewW && h === viewH && renderer.getPixelRatio() === pixelRatio) return false;
+  if (w === viewW && h === viewH) return false;
   viewW = w;
   viewH = h;
-  renderer.setPixelRatio(pixelRatio);
   renderer.setSize(w, h, false);
   pixelPass.setSize(w, h);
   camera.aspect = w / h;
@@ -279,9 +275,6 @@ async function start() {
   let pointerInside = false;
   let hoveredTray: Tray | null = null;
   let hoveredPiece: Piece | null = null;
-  let queuedTray: Tray | null = null;
-  let inspectDirty = true;
-  const pieceBox = new THREE.Box3();
   let guessValue = 0;
   const pointer = new THREE.Vector2(0, 0.2);
   const raycaster = new THREE.Raycaster();
@@ -295,39 +288,6 @@ async function start() {
 
   camPos.copy(wallView().pos);
   camLook.copy(wallView().look);
-
-  /* Warm every shader variant and upload every texture behind the loading screen, so the first
-     grab, the first cook and the first pixel-art frame don't stall while the GPU compiles. */
-  ui.loadingText.textContent = 'Heating the broth…';
-  {
-    const warm = new THREE.Group();
-    const sample = (key: string) => {
-      const item = ALL.find((i) => i.key === key)!;
-      const proto = assets.food.get(key)!;
-      const object = proto.object.clone();
-      warm.add(object);
-      return { item, grams: item.grams, object, rest: new THREE.Vector3(), footprint: 0.02, halfHeight: 0.02 };
-    };
-    const raw = [sample('shrimp'), sample('instant-noodle-block'), sample('glass-noodles')];
-    warm.position.copy(BOWL_POS);
-    scene.add(warm);
-    cooked.build(raw.map((p) => ({ ...p, object: p.object.clone() })), 'Tomato');
-    cooked.group.visible = true;
-    camera.position.copy(camPos);
-    camera.lookAt(camLook);
-    try {
-      await renderer.compileAsync(scene, camera);
-    } catch {
-      renderer.compile(scene, camera);
-    }
-    renderer.shadowMap.needsUpdate = true;
-    renderer.render(scene, camera);
-    pixelPass.render(renderer, scene, camera);
-    cooked.clear();
-    cooked.group.visible = false;
-    scene.remove(warm);
-    shadowFrames = 3;
-  }
 
   ui.rate.textContent = `${money(PRICE_PER_100G)} / 100 g`;
   SOUPS.forEach((name) => ui.soup.add(new Option(name, name)));
@@ -423,7 +383,7 @@ async function start() {
     pieces.forEach(() => (dip = tray.take()));
     dip.y += 0.012;
     const from = tongs.position.clone();
-    await tween(0.1, (k) => tongs.position.lerpVectors(from, dip, k), easeOut);
+    await tween(0.13, (k) => tongs.position.lerpVectors(from, dip, k), easeOut);
 
     tongsOpenTarget = 0;
     sfx.grab();
@@ -431,19 +391,17 @@ async function start() {
       scene.add(piece.object);
       held.push(piece.object);
     });
-    await wait(0.03);
+    await wait(0.05);
 
     const drop = BOWL_POS.clone().add(pieces[0].rest);
     drop.y = BOWL_POS.y + Math.max(pieces[0].rest.y + 0.13, bowl.height + 0.07);
-    await tween(0.3, (k) => {
+    await tween(0.36, (k) => {
       tongs.position.lerpVectors(dip, drop, k);
       tongs.position.y += Math.sin(k * Math.PI) * 0.1;
     });
 
     tongsOpenTarget = 1;
     held.length = 0;
-    // The tongs are free again: the next grab can start while these pieces settle.
-    busy = false;
     await Promise.all(
       pieces.map(async (piece, i) => {
         bowl.attach(piece);
@@ -454,6 +412,7 @@ async function start() {
       }),
     );
     refreshHud();
+    busy = false;
   }
 
   async function removePiece(piece: Piece | undefined) {
@@ -478,7 +437,6 @@ async function start() {
     );
     scene.remove(piece.object);
     busy = false;
-    inspectDirty = true;
   }
 
   /* ----- modes ----- */
@@ -731,12 +689,10 @@ async function start() {
   }
   canvas.addEventListener('pointermove', (event) => {
     pointerInside = true;
-    inspectDirty = true;
     setPointer(event);
   });
   canvas.addEventListener('pointerleave', () => {
     pointerInside = false;
-    inspectDirty = true;
     pointerDown = false;
   });
   canvas.addEventListener('pointerdown', (event) => {
@@ -825,15 +781,8 @@ async function start() {
         if (plane && tmp.z <= 0.3) tipTarget.copy(tmp);
         else if (raycaster.ray.intersectPlane(counterPlane, tmp)) tipTarget.copy(tmp);
       }
-      tongs.position.lerp(tipTarget, 1 - Math.exp(-32 * dt));
-      if (queuedTray) {
-        const tray = queuedTray;
-        queuedTray = null;
-        void grab(tray);
-      } else if ((pointerDown || clickQueued) && hoveredTray) void grab(hoveredTray);
-    } else if (clickQueued && hoveredTray) {
-      // Clicked mid-grab: remember it instead of dropping the click.
-      queuedTray = hoveredTray;
+      tongs.position.lerp(tipTarget, 1 - Math.exp(-20 * dt));
+      if ((pointerDown || clickQueued) && hoveredTray) void grab(hoveredTray);
     }
     clickQueued = false;
 
@@ -842,27 +791,9 @@ async function start() {
   }
 
   function updateInspect() {
-    let piece = hoveredPiece;
-    if (inspectDirty || busy || cameraMoves > 0) {
-      inspectDirty = false;
-      piece = null;
-      if (pointerInside && !busy) {
-        raycaster.setFromCamera(pointer, camera);
-        let best = Infinity;
-        for (const candidate of bowl.pieces) {
-          // Boxes from the geometry bounds: no per-triangle tests against 5k-triangle models.
-          pieceBox.setFromObject(candidate.object);
-          const at = raycaster.ray.intersectBox(pieceBox, tmp);
-          if (at) {
-            const d = at.distanceToSquared(raycaster.ray.origin);
-            if (d < best) {
-              best = d;
-              piece = candidate;
-            }
-          }
-        }
-      }
-    }
+    raycaster.setFromCamera(pointer, camera);
+    const hit = pointerInside && !busy ? raycaster.intersectObjects(bowl.pickTargets, true)[0] : undefined;
+    const piece = hit ? (bowl.pieceFromObject(hit.object) ?? null) : null;
     if (piece !== hoveredPiece) {
       hoveredPiece?.object.scale.setScalar(1);
       hoveredPiece = piece;
@@ -879,25 +810,7 @@ async function start() {
   }
 
   let last = performance.now();
-  let frameAvg = 16;
-  let frameCount = 0;
-  /** Trade render resolution for frame rate on slower GPUs (and give it back when there's headroom). */
-  function adaptResolution(rawMs: number) {
-    if (rawMs <= 0 || rawMs > 120 || document.hidden) return; // ignore tab switches and stalls
-    frameAvg += (rawMs - frameAvg) * 0.08;
-    frameCount += 1;
-    if (frameCount < 45) return;
-    let next = pixelRatio;
-    if (frameAvg > 21 && pixelRatio > 0.6) next = Math.max(0.6, pixelRatio - 0.15);
-    else if (frameAvg < 13 && pixelRatio < MAX_PIXEL_RATIO) next = Math.min(MAX_PIXEL_RATIO, pixelRatio + 0.1);
-    if (next !== pixelRatio) {
-      pixelRatio = Math.round(next * 100) / 100;
-      frameCount = 0;
-    }
-  }
-
   function frame(now: number) {
-    adaptResolution(now - last);
     const dt = Math.min(Math.max((now - last) / 1000, 0), 0.05);
     last = now;
     if (tweens.length > 0) shadowFrames = 2;
@@ -977,35 +890,6 @@ async function start() {
           const view = cookedView();
           camPos.copy(view.pos);
           camLook.copy(view.look);
-        },
-        /** Dev only: the cooked pot as a base64 GLB (used to stage the Blender shots). */
-        exportCooked: async () => {
-          const { GLTFExporter } = await import('three/addons/exporters/GLTFExporter.js');
-          // Per-instance colours do not survive glTF: bake each instanced mesh's first colour into
-          // its material, and export the broth opaque and named so Blender can find it.
-          const restore: Array<() => void> = [];
-          cooked.turntable.traverse((child) => {
-            const inst = child as THREE.InstancedMesh;
-            if (inst.isInstancedMesh && inst.instanceColor) {
-              const material = inst.material as THREE.MeshStandardMaterial;
-              const colors = inst.instanceColor;
-              inst.material = material.clone();
-              const c = new THREE.Color();
-              inst.getColorAt(0, c);
-              (inst.material as THREE.MeshStandardMaterial).color.copy(c);
-              inst.instanceColor = null;
-              restore.push(() => {
-                inst.material = material;
-                inst.instanceColor = colors;
-              });
-            }
-          });
-          const glb = (await new GLTFExporter().parseAsync(cooked.turntable, { binary: true })) as ArrayBuffer;
-          restore.forEach((undo) => undo());
-          let text = '';
-          const bytes = new Uint8Array(glb);
-          for (let i = 0; i < bytes.length; i += 0x8000) text += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
-          return btoa(text);
         },
         cooked, scene, camera, camPos, camLook, renderer, bowl, world, tongs, assets, state: () => ({ mode, busy, pieces: bowl.pieces.length }) },
     });

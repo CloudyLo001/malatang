@@ -102,10 +102,9 @@ export class Tray {
       this.proto.mesh.material,
       count,
     );
-    // Piles sit in the shade of the tier above: receiving is enough, and skipping them keeps
-    // the shadow pass cheap while things animate.
-    this.instanced.castShadow = false;
+    this.instanced.castShadow = true;
     this.instanced.receiveShadow = true;
+    this.instanced.frustumCulled = false;
     scene.add(this.instanced);
     this.refresh();
   }
@@ -114,7 +113,6 @@ export class Tray {
     const hidden = new THREE.Matrix4().makeScale(0, 0, 0);
     this.slots.forEach((slot, i) => this.instanced.setMatrixAt(i, slot.present ? slot.matrix : hidden));
     this.instanced.instanceMatrix.needsUpdate = true;
-    this.instanced.computeBoundingSphere();
   }
 
   /** Remove the top-most piece and return where it was. */

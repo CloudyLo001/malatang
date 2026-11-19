@@ -13,7 +13,7 @@ import sharp from 'sharp';
 const SRC = 'public/assets/mint';
 const OUT = 'public/assets/game';
 const EQUIPMENT = new Set(['hot-pot-bowl', 'serving-tongs', 'digital-scale']);
-const LOD_TRIS = 340;
+const LOD_TRIS = 650;
 
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({
   'draco3d.decoder': await draco3d.createDecoderModule(),
@@ -44,25 +44,8 @@ for (const key of readdirSync(SRC)) {
     const full = tris(doc);
     await doc.transform(
       weld(),
-      simplify({ simplifier: MeshoptSimplifier, ratio: LOD_TRIS / full, error: 0.4, lockBorder: false }),
+      simplify({ simplifier: MeshoptSimplifier, ratio: LOD_TRIS / full, error: 0.05, lockBorder: false }),
     );
-    // Meshes made of many loose pieces (shrimp legs, enoki stems) barely simplify; collapse them sloppily.
-    for (const mesh of doc.getRoot().listMeshes()) {
-      for (const prim of mesh.listPrimitives()) {
-        const indices = prim.getIndices();
-        if (indices.getCount() / 3 <= LOD_TRIS * 1.4) continue;
-        const positions = prim.getAttribute('POSITION').getArray();
-        const [sloppy] = MeshoptSimplifier.simplifySloppy(
-          new Uint32Array(indices.getArray()),
-          positions instanceof Float32Array ? positions : new Float32Array(positions),
-          3,
-          null,
-          LOD_TRIS * 3,
-          0.2,
-        );
-        indices.setArray(new Uint32Array(sloppy));
-      }
-    }
     for (const mesh of doc.getRoot().listMeshes()) for (const prim of mesh.listPrimitives()) prim.setMaterial(null);
     await doc.transform(prune());
     await io.write(`${OUT}/${key}/lod.glb`, doc);
