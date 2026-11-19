@@ -423,7 +423,7 @@ export class CookedPot {
         const corner = Math.hypot(hx, hz);
 
         // How much of this piece is under the broth: some barely float, some only poke out.
-        const sink = Math.random() < 0.35 ? rand(0.7, 0.88) : rand(0.3, 0.6);
+        const sink = Math.random() < 0.5 ? rand(0.75, 0.92) : rand(0.5, 0.72);
         let best: { x: number; z: number; y: number } | null = null;
         for (let i = 0; i < 40; i += 1) {
           // Mostly inside this ingredient's wedge; anywhere in the pot once the wedge is heaped.
@@ -435,7 +435,7 @@ export class CookedPot {
           const below = support(x, z, hx, hz);
           const y = wet
             ? // Sit in the broth at this piece's own depth; ride up a little only when crowded.
-              Math.max(surfaceY - size.y * sink, below - size.y * 0.6, 0.008)
+              Math.max(surfaceY - size.y * sink, below - size.y * 0.8, 0.008)
             : // Nestle a third of the way into whatever is below, but never under the glaze.
               Math.max(pileY - 0.014, below - size.y * 0.35);
           // The whole footprint must clear the flared wall at the height it would rest at.
@@ -452,20 +452,12 @@ export class CookedPot {
       angle += wedge;
     }
 
-    // Garnish heaped in the middle, on top of everything.
-    let crown = pileY;
-    for (let i = 0; i < field.length; i += 1) {
-      const ix = i % GRID;
-      const iz = Math.floor(i / GRID);
-      if (Math.hypot(cell(ix), cell(iz)) < R * 0.3) crown = Math.max(crown, field[i]);
-    }
-    crown = Math.min(crown, POT_H + 0.05);
-    this.addGarnish(style, crown, pileY, field, cell, GRID);
+    // Garnish scattered over the broth and whatever pokes out of it.
+    this.addGarnish(style, pileY, field, cell, GRID);
   }
 
   private addGarnish(
     style: SoupStyle,
-    crown: number,
     surfaceY: number,
     field: Float32Array,
     cell: (i: number) => number,
@@ -510,14 +502,16 @@ export class CookedPot {
       addInstanced(
         leafGeom,
         new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6, side: THREE.DoubleSide }),
-        110,
+        64,
         (i, d) => {
-          const r = Math.sqrt(Math.random()) * 0.042;
+          // A loose sprinkle in the middle, the rest scattered over the bowl, each leaf on its own.
+          const r = i < 24 ? Math.sqrt(Math.random()) * 0.05 : rand(0.03, R * 0.85);
           const a = Math.random() * Math.PI * 2;
-          d.position.set(Math.cos(a) * r, crown + 0.006 + (0.042 - r) * 0.35 + rand(0, 0.006), Math.sin(a) * r);
-          d.rotation.set(rand(-0.6, 0.6), rand(0, Math.PI * 2), rand(-0.6, 0.6));
-          d.scale.setScalar(rand(0.8, 1.3));
-          void i;
+          const x = Math.cos(a) * r;
+          const z = Math.sin(a) * r;
+          d.position.set(x, topAt(x, z) + 0.0015 + rand(0, 0.003), z);
+          d.rotation.set(rand(-0.3, 0.3), rand(0, Math.PI * 2), rand(-0.3, 0.3));
+          d.scale.setScalar(rand(0.8, 1.2));
         },
         (i) => greens[i % greens.length],
       );
@@ -529,14 +523,16 @@ export class CookedPot {
       addInstanced(
         ring,
         new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.4 }),
-        26,
+        30,
         (i, d) => {
-          const r = Math.sqrt(Math.random()) * 0.035 + 0.008;
+          // Rings scattered loose across the surface rather than piled together.
+          const r = i < 10 ? rand(0.01, 0.06) : rand(0.04, R * 0.85);
           const a = Math.random() * Math.PI * 2;
-          d.position.set(Math.cos(a) * r, crown + 0.012 + rand(0, 0.006), Math.sin(a) * r);
-          d.rotation.set(rand(-0.4, 0.4), 0, rand(-0.4, 0.4));
-          d.scale.set(1, rand(1.2, 2.2), 1);
-          void i;
+          const x = Math.cos(a) * r;
+          const z = Math.sin(a) * r;
+          d.position.set(x, topAt(x, z) + 0.001, z);
+          d.rotation.set(rand(-0.25, 0.25), 0, rand(-0.25, 0.25));
+          d.scale.set(1, rand(1, 1.5), 1);
         },
         (i) => shades[i % shades.length],
       );
