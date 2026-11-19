@@ -7,3 +7,8 @@ dist/
 .env.*
 !.env.example
 *.log
+
+# video production
+video/node_modules/
+video/out/
+video/frames/
